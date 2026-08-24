@@ -143,15 +143,65 @@
 
         /* Configuramos la nota de seguridad. */
         .aviso {
-                    /* Mejoramos el aspecto general para uso en dispositivos móviles. */
+                            /* Mejoramos el fondo general de la aplicación. */
         body {
-            background-color: #edf5f7;
+            background-color: #eef5f7;
         }
 
-        /* Mejoramos el aspecto del contenedor principal. */
+        /* Mejoramos el contenedor principal. */
         .app {
-            border-top: 5px solid #176b87;
-            box-shadow: 0 4px 16px rgba(23, 107, 135, 0.15);
+            border-top: 6px solid #176b87;
+            box-shadow: 0 5px 20px rgba(23, 107, 135, 0.18);
+        }
+
+        /* Mejoramos el título principal. */
+        h1 {
+            color: #145c73;
+            font-size: 26px;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        /* Modificamos el texto que aparece debajo del título. */
+        .descripcion {
+            color: #536b74;
+            font-size: 15px;
+            margin-bottom: 22px;
+        }
+
+        /* Mejoramos todos los botones del menú. */
+        #menu > button {
+            background-color: #176b87;
+            min-height: 58px;
+            margin-top: 12px;
+            border-radius: 12px;
+            box-shadow: 0 3px 7px rgba(23, 107, 135, 0.18);
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        /* Cambiamos el color del botón cuando se toca. */
+        #menu > button:active {
+            background-color: #0e4e63;
+            transform: scale(0.98);
+        }
+
+        /* Diferenciamos visualmente la operación 3. */
+        #menu > button:nth-of-type(3) {
+            background-color: #2e8b70;
+        }
+
+        /* Diferenciamos visualmente la operación 4. */
+        #menu > button:nth-of-type(4) {
+            background-color: #c98224;
+        }
+
+        /* Mejoramos el aviso de seguridad. */
+        .aviso {
+            border-left: 5px solid #e6a23c;
+            background-color: #fff8e8;
+            color: #66551f;
+            margin-top: 25px;
         }
 
         /* Mejoramos la apariencia de los campos al seleccionarlos. */
@@ -161,17 +211,35 @@
             box-shadow: 0 0 0 2px rgba(23, 107, 135, 0.15);
         }
 
-        /* Mejoramos la respuesta visual al tocar los botones. */
+        /* Mejoramos la respuesta visual de los botones. */
         button {
-            transition: transform 0.1s;
+            transition: transform 0.1s, background-color 0.15s;
         }
 
-        /* Reducimos ligeramente el tamaño del botón al tocarlo. */
-        button:active {
-            transform: scale(0.98);
-        }
+        /* Adaptamos la aplicación a teléfonos pequeños. */
+        @media (max-width: 480px) {
 
-        /* Adaptamos el contenido a pantallas pequeñas. */
+            /* Reducimos los márgenes exteriores. */
+            body {
+                padding: 8px;
+            }
+
+            /* Reducimos ligeramente el espacio interno. */
+            .app {
+                padding: 17px;
+            }
+
+            /* Adaptamos el título al tamaño del celular. */
+            h1 {
+                font-size: 23px;
+            }
+
+            /* Hacemos los botones más cómodos para tocar. */
+            #menu > button {
+                min-height: 62px;
+                font-size: 16px;
+            }
+        }
         @media (max-width: 480px) {
             .app {
                 padding: 17px;
