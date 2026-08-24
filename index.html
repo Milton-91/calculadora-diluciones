@@ -143,15 +143,48 @@
 
         /* Configuramos la nota de seguridad. */
         .aviso {
-            margin-top: 25px;
-            padding: 12px;
-            background-color: #fff7df;
-            border-radius: 10px;
-            font-size: 13px;
-            color: #765d16;
-            line-height: 1.4;
+                    /* Mejoramos el aspecto general para uso en dispositivos móviles. */
+        body {
+            background-color: #edf5f7;
         }
 
+        /* Mejoramos el aspecto del contenedor principal. */
+        .app {
+            border-top: 5px solid #176b87;
+            box-shadow: 0 4px 16px rgba(23, 107, 135, 0.15);
+        }
+
+        /* Mejoramos la apariencia de los campos al seleccionarlos. */
+        input:focus {
+            outline: none;
+            border-color: #176b87;
+            box-shadow: 0 0 0 2px rgba(23, 107, 135, 0.15);
+        }
+
+        /* Mejoramos la respuesta visual al tocar los botones. */
+        button {
+            transition: transform 0.1s;
+        }
+
+        /* Reducimos ligeramente el tamaño del botón al tocarlo. */
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* Adaptamos el contenido a pantallas pequeñas. */
+        @media (max-width: 480px) {
+            .app {
+                padding: 17px;
+            }
+
+            h1 {
+                font-size: 23px;
+            }
+
+            h2 {
+                font-size: 19px;
+            }
+        }
     </style>
 
 </head>
