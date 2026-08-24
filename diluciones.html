@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <!-- Permitimos utilizar correctamente caracteres como á, é, í, ó y ú. -->
+    <meta charset="UTF-8">
+
+    <!-- Adaptamos la aplicación al tamaño de la pantalla del celular. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Definimos el título de la aplicación. -->
+    <title>Operaciones con Diluciones</title>
+
+    <!-- Comenzamos los estilos de la aplicación. -->
+    <style>
+
+        /* Configuramos el aspecto general de la página. */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaf3f6;
+            margin: 0;
+            padding: 15px;
+            color: #26343b;
+        }
+
+        /* Configuramos el contenedor principal. */
+        .app {
+            max-width: 500px;
+            margin: auto;
+            background-color: white;
+            padding: 22px;
+            border-radius: 20px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.15);
+        }
+
+        /* Configuramos el título principal. */
+        h1 {
+            text-align: center;
+            color: #176b87;
+            font-size: 25px;
+            margin-bottom: 25px;
+        }
+
+        /* Configuramos los títulos de cada operación. */
+        h2 {
+            color: #176b87;
+            font-size: 21px;
+            text-align: center;
+        }
+
+        /* Configuramos las etiquetas de los campos. */
+        label {
+            display: block;
+            margin-top: 18px;
+            font-weight: bold;
+            line-height: 1.3;
+        }
+
+        /* Configuramos los campos de ingreso de datos. */
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-top: 7px;
+            box-sizing: border-box;
+            border: 1px solid #b8c8cf;
+            border-radius: 10px;
+            font-size: 18px;
+            background-color: #fafcfd;
+        }
+
+        /* Configuramos los botones principales. */
+        button {
+            width: 100%;
+            padding: 16px;
+            margin-top: 14px;
+            border: none;
+            border-radius: 11px;
+            background-color: #176b87;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Cambiamos ligeramente el color cuando se presiona un botón. */
+        button:active {
+            background-color: #0e4e63;
+        }
+
+        /* Configuramos los botones de limpieza. */
+        .limpiar {
+            background-color: #d98c27;
+        }
+
+        /* Configuramos los botones para volver al menú. */
+        .volver {
+            background-color: #777777;
+        }
+
+        /* Configuramos el cuadro de resultados. */
+        .resultado {
+            margin-top: 22px;
+            padding: 18px;
+            background-color: #e5f5ea;
+            border-radius: 12px;
+            border-left: 6px solid #2e8b57;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* Configuramos el resultado principal para destacarlo. */
+        .resultado-principal {
+            font-size: 20px;
+            font-weight: bold;
+            color: #176b4d;
+            margin-bottom: 10px;
+        }
+
+        /* Configuramos los mensajes de error. */
+        .error {
+            margin-top: 18px;
+            padding: 14px;
+            background-color: #ffe5e5;
+            border-radius: 10px;
+            border-left: 6px solid #c62828;
+            color: #a00000;
+            font-weight: bold;
+        }
+
+        /* Ocultamos las secciones que no están siendo utilizadas. */
+        .oculto {
+            display: none;
+        }
+
+        /* Configuramos el texto informativo del menú. */
+        .descripcion {
+            text-align: center;
+            color: #596a72;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        /* Configuramos la nota de seguridad. */
+        .aviso {
+            margin-top: 25px;
+            padding: 12px;
+            background-color: #fff7df;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #765d16;
+            line-height: 1.4;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Comenzamos el contenedor principal de la aplicación. -->
+    <div class="app">
+
+        <!-- Mostramos el nombre de la aplicación. -->
+        <h1>🧪 OPERACIONES CON DILUCIONES</h1>
+
+        <!-- Comenzamos el menú principal. -->
+        <div id="menu">
+
+            <!-- Mostramos una breve explicación. -->
+            <div class="descripcion">
+                Seleccioná la operación que querés realizar.
+            </div>
+
+            <!-- Botón para la operación 1. -->
+            <button onclick="mostrarOperacion(1)">
+                1 - Volumen a extraer
+            </button>
+
+            <!-- Botón para la operación 2. -->
+            <button onclick="mostrarOperacion(2)">
+                2 - Droga en un volumen
+            </button>
+
+            <!-- Botón para la operación 3. -->
+            <button onclick="mostrarOperacion(3)">
+                3 - Preparación demasiado diluida
+            </button>
+
+            <!-- Botón para la operación 4. -->
+            <button onclick="mostrarOperacion(4)">
+                4 - Exceso de droga
+            </button>
+
+            <!-- Mostramos una advertencia general. -->
+            <div class="aviso">
+                Esta aplicación realiza cálculos matemáticos de volumen y concentración.
+                Las decisiones sobre preparación, corrección y utilización de soluciones
+                deben seguir los procedimientos correspondientes de la institución.
+            </div>
+
+        </div>
+
+        <!-- Comenzamos la operación 1. -->
+        <div id="operacion1" class="oculto">
+
+            <!-- Mostramos el título. -->
+            <h2>Volumen a extraer</h2>
+
+            <!-- Pedimos el volumen total. -->
+            <label>Volumen total de la preparación en ml</label>
+
+            <input type="number" id="op1_volumen_total" step="any">
+
+            <!-- Pedimos el volumen total de droga. -->
+            <label>Volumen total de droga en ml</label>
+
+            <input type="number" id="op1_volumen_droga" step="any">
+
+            <!-- Pedimos el volumen de droga que queremos extraer. -->
+            <label>Volumen de droga que querés extraer en ml</label>
+
+            <input type="number" id="op1_droga_extraer" step="any">
+
+            <!-- Botón para calcular. -->
+            <button onclick="calcularOperacion1()">
+                CALCULAR
+            </button>
+
+            <!-- Botón para limpiar los datos. -->
+            <button class="limpiar" onclick="limpiarOperacion(1)">
+                LIMPIAR
+            </button>
+
+            <!-- Espacio para mostrar los resultados. -->
+            <div id="resultado1"></div>
+
+            <!-- Botón para volver al menú. -->
+            <button class="volver" onclick="volverMenu()">
+                VOLVER AL MENÚ
+            </button>
+
+        </div>
+
+        <!-- Comenzamos la operación 2. -->
+        <div id="operacion2" class="oculto">
+
+            <!-- Mostramos el título. -->
+            <h2>Droga en un volumen</h2>
+
+            <!-- Pedimos el volumen total. -->
+            <label>Volumen total de la preparación en ml</label>
+
+            <input type="number" id="op2_volumen_total" step="any">
+
+            <!-- Pedimos el volumen total de droga. -->
+            <label>Volumen total de droga en ml</label>
+
+            <input type="number" id="op2_volumen_droga" step="any">
+
+            <!-- Pedimos el volumen que queremos extraer. -->
+            <label>Volumen de solución que querés extraer en ml</label>
+
+            <input type="number" id="op2_volumen_extraer" step="any">
+
+            <!-- Botón para calcular. -->
+            <button onclick="calcularOperacion2()">
+                CALCULAR
+            </button>
+
+            <!-- Botón para limpiar los datos. -->
+            <button class="limpiar" onclick="limpiarOperacion(2)">
+                LIMPIAR
+            </button>
+
+            <!-- Espacio para mostrar los resultados. -->
+            <div id="resultado2"></div>
+
+            <!-- Botón para volver al menú. -->
+            <button class="volver" onclick="volverMenu()">
+                VOLVER AL MENÚ
+            </button>
+
+        </div>
+
+        <!-- Comenzamos la operación 3. -->
+        <div id="operacion3" class="oculto">
+
+            <!-- Mostramos el título. -->
+            <h2>Preparación demasiado diluida</h2>
+
+            <!-- Pedimos la concentración de la solución concentrada. -->
+            <label>
+                Concentración de la solución concentrada de droga en mg/ml
+            </label>
+
+            <input type="number" id="op3_concentracion" step="any">
+
+            <!-- Pedimos la dosis requerida. -->
+            <label>Dosis de droga requerida en mg</label>
+
+            <input type="number" id="op3_dosis" step="any">
+
+            <!-- Pedimos el volumen final requerido. -->
+            <label>Volumen final requerido en ml</label>
+
+            <input type="number" id="op3_volumen_final" step="any">
+
+            <!-- Pedimos el volumen de la preparación errónea. -->
+            <label>Volumen final de la preparación errónea en ml</label>
+
+            <input type="number" id="op3_volumen_error" step="any">
+
+            <!-- Botón para calcular. -->
+            <button onclick="calcularOperacion3()">
+                CALCULAR
+            </button>
+
+            <!-- Botón para limpiar los datos. -->
+            <button class="limpiar" onclick="limpiarOperacion(3)">
+                LIMPIAR
+            </button>
+
+            <!-- Espacio para mostrar los resultados. -->
+            <div id="resultado3"></div>
+
+            <!-- Botón para volver al menú. -->
+            <button class="volver" onclick="volverMenu()">
+                VOLVER AL MENÚ
+            </button>
+
+        </div>
+
+        <!-- Comenzamos la operación 4. -->
+        <div id="operacion4" class="oculto">
+
+            <!-- Mostramos el título. -->
+            <h2>Exceso de droga</h2>
+
+            <!-- Pedimos la concentración de la solución concentrada. -->
+            <label>
+                Concentración de la solución concentrada de droga en mg/ml
+            </label>
+
+            <input type="number" id="op4_concentracion" step="any">
+
+            <!-- Pedimos la dosis requerida. -->
+            <label>Dosis de droga requerida en mg</label>
+
+            <input type="number" id="op4_dosis" step="any">
+
+            <!-- Pedimos el volumen final requerido. -->
+            <label>Volumen final requerido en ml</label>
+
+            <input type="number" id="op4_volumen_final" step="any">
+
+            <!-- Pedimos cuánto se agregó realmente. -->
+            <label>
+                Volumen de solución concentrada agregado realmente en ml
+            </label>
+
+            <input type="number" id="op4_volumen_real" step="any">
+
+            <!-- Botón para calcular. -->
+            <button onclick="calcularOperacion4()">
+                CALCULAR
+            </button>
+
+            <!-- Botón para limpiar los datos. -->
+            <button class="limpiar" onclick="limpiarOperacion(4)">
+                LIMPIAR
+            </button>
+
+            <!-- Espacio para mostrar los resultados. -->
+            <div id="resultado4"></div>
+
+            <!-- Botón para volver al menú. -->
+            <button class="volver" onclick="volverMenu()">
+                VOLVER AL MENÚ
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Comenzamos el código JavaScript. -->
+    <script>
+
+        // Mostramos la operación seleccionada.
+        function mostrarOperacion(numero) {
+
+            // Ocultamos el menú.
+            document.getElementById("menu").classList.add("oculto");
+
+            // Ocultamos la operación 1.
+            document.getElementById("operacion1").classList.add("oculto");
+
+            // Ocultamos la operación 2.
+            document.getElementById("operacion2").classList.add("oculto");
+
+            // Ocultamos la operación 3.
+            document.getElementById("operacion3").classList.add("oculto");
+
+            // Ocultamos la operación 4.
+            document.getElementById("operacion4").classList.add("oculto");
+
+            // Mostramos la operación seleccionada.
+            document.getElementById("operacion" + numero).classList.remove("oculto");
+        }
+
+        // Volvemos al menú principal.
+        function volverMenu() {
+
+            // Mostramos el menú.
+            document.getElementById("menu").classList.remove("oculto");
+
+            // Ocultamos la operación 1.
+            document.getElementById("operacion1").classList.add("oculto");
+
+            // Ocultamos la operación 2.
+            document.getElementById("operacion2").classList.add("oculto");
+
+            // Ocultamos la operación 3.
+            document.getElementById("operacion3").classList.add("oculto");
+
+            // Ocultamos la operación 4.
+            document.getElementById("operacion4").classList.add("oculto");
+
+            // Limpiamos todos los datos.
+            limpiarOperacion(1);
+
+            // Limpiamos todos los datos.
+            limpiarOperacion(2);
+
+            // Limpiamos todos los datos.
+            limpiarOperacion(3);
+
+            // Limpiamos todos los datos.
+            limpiarOperacion(4);
+        }
+
+        // Limpiamos los datos de una operación.
+        function limpiarOperacion(numero) {
+
+            // Buscamos todos los campos de la operación seleccionada.
+            let operacion = document.getElementById("operacion" + numero);
+
+            // Buscamos todos los campos de entrada.
+            let campos = operacion.querySelectorAll("input");
+
+            // Recorremos todos los campos.
+            campos.forEach(function(campo) {
+
+                // Borramos el contenido del campo.
+                campo.value = "";
+
+            });
+
+            // Borramos el resultado anterior.
+            document.getElementById("resultado" + numero).innerHTML = "";
+        }
+
+        // Verificamos que los datos sean positivos.
+        function datosValidos(valores) {
+
+            // Recorremos todos los valores.
+            for (let valor of valores) {
+
+                // Comprobamos si el valor no es válido.
+                if (isNaN(valor) || valor <= 0) {
+
+                    // Informamos que hay un dato incorrecto.
+                    return false;
+                }
+            }
+
+            // Confirmamos que todos los valores son válidos.
+            return true;
+        }
+
+        // Calculamos la operación 1.
+        function calcularOperacion1() {
+
+            // Obtenemos el volumen total.
+            let volumenTotal = parseFloat(document.getElementById("op1_volumen_total").value);
+
+            // Obtenemos el volumen total de droga.
+            let volumenDroga = parseFloat(document.getElementById("op1_volumen_droga").value);
+
+            // Obtenemos la cantidad de droga que queremos extraer.
+            let drogaExtraer = parseFloat(document.getElementById("op1_droga_extraer").value);
+
+            // Verificamos que los datos sean correctos.
+            if (!datosValidos([volumenTotal, volumenDroga, drogaExtraer])) {
+
+                // Mostramos un mensaje de error.
+                document.getElementById("resultado1").innerHTML =
+                    "<div class='error'>Ingresá valores positivos mayores que cero.</div>";
+
+                // Detenemos el cálculo.
+                return;
+            }
+
+            // Comprobamos que la droga a extraer no supere la cantidad disponible.
+            if (drogaExtraer > volumenDroga) {
+
+                // Mostramos un mensaje de error.
+                document.getElementById("resultado1").innerHTML =
+                    "<div class='error'>No podés extraer más droga de la que contiene la preparación.</div>";
+
+                // Detenemos el cálculo.
+                return;
+            }
+
+            // Calculamos el volumen de preparación que debemos retirar.
+            let volumenExtraer = (volumenTotal / volumenDroga) * drogaExtraer;
+
+            // Calculamos el volumen restante.
+            let volumenRestante = volumenTotal - volumenExtraer;
+
+            // Calculamos la droga restante.
+            let drogaRestante = volumenDroga - drogaExtraer;
+
+            // Mostramos el resultado.
+            document.getElementById("resultado1").innerHTML =
+                "<div class='resultado'>" +
+                "<div class='resultado-principal'>Retirar: " + volumenExtraer.toFixed(2) + " ml de preparación</div>" +
+                "Droga extraída: " + drogaExtraer.toFixed(2) + " ml<br>" +
+                "Volumen restante: " + volumenRestante.toFixed(2) + " ml<br>" +
+                "Droga restante: " + drogaRestante.toFixed(2) + " ml" +
+                "</div>";
+        }
+
+        // Calculamos la operación 2.
+        function calcularOperacion2() {
+
+            // Obtenemos el volumen total.
+            let volumenTotal = parseFloat(document.getElementById("op2_volumen_total").value);
+
+            // Obtenemos el volumen total de droga.
+            let volumenDroga = parseFloat(document.getElementById("op2_volumen_droga").value);
+
+            // Obtenemos el volumen que queremos retirar.
+            let volumenExtraer = parseFloat(document.getElementById("op2_volumen_extraer").value);
+
+            // Verificamos que los datos sean correctos.
+            if (!datosValidos([volumenTotal, volumenDroga, volumenExtraer])) {
+
+                // Mostramos un mensaje de error.
+                document.getElementById("resultado2").innerHTML =
+                    "<div class='error'>Ingresá valores positivos mayores que cero.</div>";
+
+                // Detenemos el cálculo.
+                return;
+            }
+
+            // Comprobamos que no se retire más volumen del disponible.
+            if (volumenExtraer > volumenTotal) {
+
+                // Mostramos un mensaje de error.
+                document.getElementById("resultado2").innerHTML =
+                    "<div class='error'>No podés retirar más volumen del que contiene la preparación.</div>";
+
+                // Detenemos el cálculo.
+                return;
+            }
+
+            // Calculamos la droga contenida en el volumen retirado.
+            let drogaExtraer = (volumenDroga / volumenTotal) * volumenExtraer;
+
+            // Calculamos el volumen restante.
+            let volumenRestante = volumenTotal - volumenExtraer;
+
+            // Calculamos la droga restante.
+            let drogaRestante = volumenDroga - drogaExtraer;
+
+            // Mostramos el resultado.
+            document.getElementById("resultado2").innerHTML =
+                "<div class='resultado'>" +
+                "<div class='resultado-principal'>Droga extraída: " + drogaExtraer.toFixed(2) + " ml</div>" +
+                "Volumen extraído: " + volumenExtraer.toFixed(2) + " ml<br>" +
+                "Volumen restante: " + volumenRestante.toFixed(2) + " ml<br>" +
+                "Droga restante: " + drogaRestante.toFixed(2) + " ml" +
+                "</div>";
+        }
+
+        // Calculamos la operación 3.
+        function calcularOperacion3() {
+
+            // Obtenemos la concentración de la solución concentrada.
+            let concentracion = parseFloat(document.getElementById("op3_concentracion").value);
+
+            // Obtenemos la dosis requerida.
+            let dosis = parseFloat(document.getElementById("op3_dosis").value);
+
+            // Obtenemos el volumen final requerido.
+            let volumenFinal = parseFloat(document.getElementById("op3_volumen_final").value);
+
+            // Obtenemos el volumen de la preparación errónea.
+            let volumenError = parseFloat(document.getElementById("op3_volumen_error").value);
+
+            // Verificamos que los datos sean correctos.
+            if (!datosValidos([concentracion, dosis, volumenFinal, volumenError])) {
+
+                // Mostramos un mensaje de error.
+                document.getElementById("resultado3").innerHTML =
+                    "<div class='error'>Ingresá valores positivos mayores que cero.</div>";
+
+                // Detenemos el cálculo.
+                return;
+            }
+
+            // Comprobamos que la preparación errónea sea realmente más diluida.
+            if (volumenError <= volumenFinal) {
+
+                // Mostramos un mensaje de error.
+                document.getElementById("resultado3").innerHTML =
+                    "<div class='error'>El volumen de la preparación errónea debe ser mayor que el volumen final requerido.</div>";
+
+                // Detenemos el cálculo.
+                return;
+            }
+
+            // Calculamos el volumen original de solución concentrada.
+            let volumenDroga = dosis / concentracion;
+
+            // Calculamos la concentración original requerida.
+            let concentracionOriginal = dosis / volumenFinal;
+
+            // Calculamos la concentración de la preparación errónea.
+            let concentracionError = dosis / volumenError;
+
+            // Calculamos cuánto de la preparación errónea necesitamos utilizar.
+            let volumenErrorNecesario =
+                ((concentracion - concentracionOriginal) * volumenFinal) /
+                (concentracion - concentracionError);
+
+            // Calculamos cuánto de solución concentrada necesitamos agregar.
+            let volumenConcentrado =
+                volumenFinal - volumenErrorNecesario;
+
+            // Calculamos la concentración final.
+            let concentracionFinal =
+                dosis / volumenFinal;
+
+            // Mostramos el resultado.
+            document.getElementById("resultado3").innerHTML =
+                "<div class='resultado'>" +
+                "<div class='resultado-principal'>Usar " + volumenErrorNecesario.toFixed(2) + " ml de preparación errónea</div>" +
+                "<div class='resultado-principal'>Agregar " + volumenConcentrado.toFixed(2) + " ml de solución concentrada</div>" +
+                "Volumen original de solución concentrada: " + volumenDroga.toFixed(2) + " ml<br>" +
+                "Concentración requerida: " + concentracionOriginal.toFixed(2) + " mg/ml<br>" +
+                "Concentración de la preparación errónea: " + concentracionError.toFixed(2) + " mg/ml<br>" +
+                "Volumen final: " + volumenFinal.toFixed(2) + " ml<br>" +
+                "Concentración final: " + concentracionFinal.toFixed(2) + " mg/ml" +
+                "</div>";
+        }
+
+        // Calculamos la operación 4.
+        function calcularOperacion4() {
+
+            // Obtenemos la concentración de la solución concentrada.
+            let concentracion = parseFloat(document.getElementById("op4_concentracion").value);
+
+            // Obtenemos la dosis requerida.
+            let dosis = parseFloat(document.getElementById("op4_dosis").value);
+
+            // Obtenemos el volumen final requerido.
+            let volumenFinal = parseFloat(document.getElementById("op4_volumen_final").value);
+
+            // Obtenemos el volumen agregado realmente.
+            let volumenReal = parseFloat(document.getElementById("op4_volumen_real").value);
+
+            // Verificamos que los datos sean correctos.
+            if (!datosValidos([concentracion, dosis, volumenFinal, volumenReal])) {
+
+                // Mostramos un mensaje de error.
+                document.getElementById("resultado4").innerHTML =
+                    "<div class='error'>Ingresá valores positivos mayores que cero.</div>";
+
+                // Detenemos el cálculo.
+                return;
+            }
+
+            // Calculamos la dosis real presente.
+            let dosisReal = concentracion * volumenReal;
+
+            // Comprobamos que realmente exista exceso de droga.
+            if (dosisReal <= dosis) {
+
+                // Mostramos un mensaje de error.
+                document.getElementById("resultado4").innerHTML =
+                    "<div class='error'>La cantidad ingresada no supera la dosis requerida. No hay exceso de droga.</div>";
+
+                // Detenemos el cálculo.
+                return;
+            }
+
+            // Calculamos la concentración requerida.
+            let concentracionRequerida = dosis / volumenFinal;
+
+            // Calculamos la concentración actual.
+            let concentracionActual = dosisReal / volumenFinal;
+
+            // Calculamos el exceso de droga.
+            let excesoDroga = dosisReal - dosis;
+
+            // Calculamos cuánto volumen de preparación debemos retirar.
+            let volumenRetirar = excesoDroga / concentracionActual;
+
+            // Calculamos cuánto vehículo debemos agregar.
+            let volumenVehiculo = volumenRetirar;
+
+            // Calculamos la droga final.
+            let drogaFinal =
+                dosisReal - (volumenRetirar * concentracionActual);
+
+            // Calculamos la concentración final.
+            let concentracionFinal =
+                drogaFinal / volumenFinal;
+
+            // Mostramos el resultado.
+            document.getElementById("resultado4").innerHTML =
+                "<div class='resultado'>" +
+                "<div class='resultado-principal'>Retirar: " + volumenRetirar.toFixed(2) + " ml</div>" +
+                "<div class='resultado-principal'>Reemplazar por vehículo: " + volumenVehiculo.toFixed(2) + " ml</div>" +
+                "Dosis requerida: " + dosis.toFixed(2) + " mg<br>" +
+                "Dosis real: " + dosisReal.toFixed(2) + " mg<br>" +
+                "Exceso de droga: " + excesoDroga.toFixed(2) + " mg<br>" +
+                "Concentración actual: " + concentracionActual.toFixed(2) + " mg/ml<br>" +
+                "Volumen final: " + volumenFinal.toFixed(2) + " ml<br>" +
+                "Dosis final: " + drogaFinal.toFixed(2) + " mg<br>" +
+                "Concentración final: " + concentracionFinal.toFixed(2) + " mg/ml" +
+                "</div>";
+        }
+
+    </script>
+
+</body>
+
+</html>
