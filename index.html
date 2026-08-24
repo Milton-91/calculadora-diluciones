@@ -18,141 +18,205 @@
         /* Configuramos el aspecto general de la página. */
         body {
             font-family: Arial, sans-serif;
-            background-color: #eaf3f6;
+            background-color: #eef5f7;
             margin: 0;
             padding: 15px;
             color: #26343b;
         }
 
-        /* Configuramos el contenedor principal. */
+        /* Configuramos el contenedor principal de la aplicación. */
         .app {
             max-width: 500px;
             margin: auto;
-            background-color: white;
+            background-color: #ffffff;
             padding: 22px;
-            border-radius: 20px;
-            box-shadow: 0 5px 18px rgba(0,0,0,0.15);
+            border-radius: 18px;
+            box-shadow: 0 4px 16px rgba(0, 70, 90, 0.15);
+            border-top: 6px solid #176b87;
         }
 
         /* Configuramos el título principal. */
         h1 {
             text-align: center;
-            color: #176b87;
-            font-size: 25px;
+            color: #145c73;
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+
+        /* Configuramos el subtítulo de la aplicación. */
+        h1 + p {
+            text-align: center;
+            color: #607d86;
+            font-size: 14px;
+            margin-top: 0;
             margin-bottom: 25px;
         }
 
         /* Configuramos los títulos de cada operación. */
         h2 {
-            color: #176b87;
-            font-size: 21px;
-            text-align: center;
+            color: #145c73;
+            font-size: 20px;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* Configuramos los textos de las instrucciones. */
+        p {
+            line-height: 1.5;
         }
 
         /* Configuramos las etiquetas de los campos. */
         label {
             display: block;
-            margin-top: 18px;
             font-weight: bold;
-            line-height: 1.3;
+            color: #344f58;
+            margin-top: 14px;
+            margin-bottom: 6px;
         }
 
-        /* Configuramos los campos de ingreso de datos. */
-        input {
+        /* Configuramos los campos donde se ingresan datos. */
+        input,
+        select {
             width: 100%;
-            padding: 14px;
-            margin-top: 7px;
             box-sizing: border-box;
-            border: 1px solid #b8c8cf;
-            border-radius: 10px;
-            font-size: 18px;
-            background-color: #fafcfd;
+            padding: 12px;
+            border: 1px solid #b8cbd1;
+            border-radius: 9px;
+            font-size: 16px;
+            background-color: #fbfdfe;
+            color: #26343b;
         }
 
-        /* Configuramos los botones principales. */
+        /* Cambiamos el aspecto del campo cuando está seleccionado. */
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #176b87;
+            box-shadow: 0 0 0 2px rgba(23, 107, 135, 0.15);
+        }
+
+        /* Configuramos los botones generales. */
         button {
             width: 100%;
-            padding: 16px;
-            margin-top: 14px;
+            padding: 13px;
+            margin-top: 12px;
             border: none;
-            border-radius: 11px;
-            background-color: #176b87;
-            color: white;
-            font-size: 17px;
+            border-radius: 9px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
+            background-color: #176b87;
+            color: white;
+            transition: background-color 0.2s;
         }
 
-        /* Cambiamos ligeramente el color cuando se presiona un botón. */
+        /* Cambiamos el color del botón cuando se pasa el cursor. */
+        button:hover {
+            background-color: #12566d;
+        }
+
+        /* Cambiamos el aspecto del botón cuando se presiona. */
         button:active {
-            background-color: #0e4e63;
+            transform: scale(0.98);
         }
 
-        /* Configuramos los botones de limpieza. */
-        .limpiar {
-            background-color: #d98c27;
+        /* Configuramos los botones secundarios. */
+        .secondary {
+            background-color: #607d86;
         }
 
-        /* Configuramos los botones para volver al menú. */
-        .volver {
-            background-color: #777777;
+        /* Configuramos el botón secundario cuando se pasa el cursor. */
+        .secondary:hover {
+            background-color: #4d6870;
         }
 
-        /* Configuramos el cuadro de resultados. */
+        /* Configuramos los resultados de los cálculos. */
         .resultado {
-            margin-top: 22px;
-            padding: 18px;
-            background-color: #e5f5ea;
-            border-radius: 12px;
-            border-left: 6px solid #2e8b57;
-            line-height: 1.7;
-            font-size: 16px;
+            margin-top: 20px;
+            padding: 16px;
+            background-color: #edf7f2;
+            border-left: 5px solid #2e8b70;
+            border-radius: 8px;
         }
 
-        /* Configuramos el resultado principal para destacarlo. */
-        .resultado-principal {
-            font-size: 20px;
-            font-weight: bold;
-            color: #176b4d;
-            margin-bottom: 10px;
+        /* Destacamos el texto principal de los resultados. */
+        .resultado strong {
+            color: #176b87;
+            font-size: 18px;
+        }
+
+        /* Configuramos los mensajes de advertencia. */
+        .advertencia {
+            margin-top: 15px;
+            padding: 14px;
+            background-color: #fff7e6;
+            border-left: 5px solid #e6a23c;
+            border-radius: 8px;
+            color: #704f16;
         }
 
         /* Configuramos los mensajes de error. */
         .error {
-            margin-top: 18px;
+            margin-top: 15px;
             padding: 14px;
-            background-color: #ffe5e5;
-            border-radius: 10px;
-            border-left: 6px solid #c62828;
-            color: #a00000;
+            background-color: #fff0f0;
+            border-left: 5px solid #d9534f;
+            border-radius: 8px;
+            color: #8a2522;
             font-weight: bold;
         }
 
-        /* Ocultamos las secciones que no están siendo utilizadas. */
-        .oculto {
-            display: none;
+        /* Configuramos las secciones de las operaciones. */
+        .operacion {
+            margin-bottom: 25px;
+            padding: 18px;
+            background-color: #f8fbfc;
+            border: 1px solid #d7e5e9;
+            border-radius: 13px;
         }
 
-        /* Configuramos el texto informativo del menú. */
-        .descripcion {
+        /* Configuramos los botones del menú principal. */
+        .menu-button {
+            background-color: #176b87;
+            margin-top: 10px;
+            padding: 15px;
+        }
+
+        /* Configuramos el texto informativo de la aplicación. */
+        .info {
             text-align: center;
-            color: #596a72;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-
-        /* Configuramos la nota de seguridad. */
-        .aviso {
+            color: #71858c;
+            font-size: 12px;
             margin-top: 25px;
-            padding: 12px;
-            background-color: #fff7df;
-            border-radius: 10px;
-            font-size: 13px;
-            color: #765d16;
-            line-height: 1.4;
         }
 
-    </style>
+        /* Adaptamos la aplicación a pantallas pequeñas. */
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+
+            .app {
+                padding: 17px;
+                border-radius: 14px;
+            }
+
+            h1 {
+                font-size: 23px;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+
+            input,
+            select,
+            button {
+                font-size: 16px;
+            }
+        }
+
+</style>
 
 </head>
 
